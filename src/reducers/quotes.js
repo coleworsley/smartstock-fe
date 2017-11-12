@@ -4,7 +4,7 @@ const initialState = {
   quotes: [],
 }
 
-const quotes = (state={}, action) => {
+const quotes = (state=initialState, action) => {
   switch (action.type) {
     case 'QUOTES_LOADING':
       return Object.assign(state, { loading: action.loading });

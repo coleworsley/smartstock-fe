@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import sample from './sample';
+import quotes from './quotes';
 
 
 export default combineReducers({
-  sample
+  quotes,
 });

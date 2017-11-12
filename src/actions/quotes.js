@@ -23,12 +23,12 @@ export const fetchQuotes = (symbols) => {
   return (dispatch) => {
     dispatch(quotesLoading(true));
 
-    fetch(`/api/v1/quotes?${symbols}`)
+    fetch(`/api/v1/quotes?symbols=${symbols}`)
       .then((res) => {
         dispatch(quotesLoading(false))
         return res.json();
       })
-      .then(({data}) => {
+      .then((data) => {
         return dispatch(quotes(data))
       })
       .catch((error) => {

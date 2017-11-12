@@ -1,30 +1,54 @@
 import React, { Component } from 'react';
-import { ALPHAVANTAGE_API_KEY } from '../API_KEYS';
+import { connect } from 'react-redux';
+import { fetchQuotes } from '../actions';
 
 class StockPrice extends Component {
   constructor() {
     super();
-    this.state = { data: {},  }
+    this.example = 'example'
   }
 
   componentDidMount() {
-    fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&outputsize=compact&apikey=${ALPHAVANTAGE_API_KEY}`)
-      .then(res => res.json())
-      .then(data => this.setState({ data }))
-      .catch(error => console.log(error))
+    console.log(this.props)
+    this.props.fetchQuotes('AAPL');
+    fetch(`/api/v1/quotes?symbols=${'AAPL'}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then(({data}) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+
+
   }
 
 
-
   render() {
-    const data = this.state.data["Time Series (Daily)"]  || {}
-    const keys = Object.keys(data)
+    // console.log(this.props)
     return (
       <div>
-        {keys}
+        test
       </div>
     )
   }
 }
 
-export default StockPrice;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchQuotes: (symbols) => dispatch(fetchQuotes(symbols))
+  }
+}
+
+const mapStateToProps = (state) => {
+  const { quotes } = state;
+  return {
+    quotes,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StockPrice);
