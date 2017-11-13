@@ -1,17 +1,17 @@
 const initialState = {
   loading: false,
   error: false,
-  quotes: [],
+  data: [],
 }
 
 const quotes = (state=initialState, action) => {
   switch (action.type) {
     case 'QUOTES_LOADING':
-      return Object.assign(state, { loading: action.loading });
+      return Object.assign({}, state, { loading: action.loading });
     case 'QUOTE_ERROR':
-      return Object.assign(state, { error: action.error });
+      return Object.assign({}, state, { error: action.error });
     case 'QUOTE':
-      return Object.assign(state, { quotes: action.data });;
+      return Object.assign({}, state, { data: action.data });;
     default:
       return state;
   }

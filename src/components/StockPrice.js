@@ -9,29 +9,41 @@ class StockPrice extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.props.fetchQuotes('AAPL');
-    fetch(`/api/v1/quotes?symbols=${'AAPL'}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then(({data}) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-
-
-
   }
 
+  componentWillReceiveProps(np) {
+    console.log(np)
+  }
 
   render() {
-    // console.log(this.props)
+    console.log(this.props.quotes)
+    const quotes = this.props.quotes.data.map(quote => {
+      return (
+        <tr>
+          <td>{quote.name}</td>
+          <td>{quote.lastPrice}</td>
+          <td>{quote.netChange}</td>
+          <td>{quote.percentChange}</td>
+        </tr>
+      )
+    })
+
     return (
       <div>
-        test
+        <table>
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Last Price</th>
+              <th>Change</th>
+              <th>% Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            {quotes}
+          </tbody>
+        </table>
       </div>
     )
   }

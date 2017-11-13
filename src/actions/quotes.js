@@ -13,6 +13,7 @@ export const quoteError = (error) => {
 }
 
 export const quotes = (data) => {
+  console.log(data)
   return {
     type: 'QUOTE',
     data,
@@ -29,7 +30,7 @@ export const fetchQuotes = (symbols) => {
         return res.json();
       })
       .then((data) => {
-        return dispatch(quotes(data))
+        return dispatch(quotes(data));
       })
       .catch((error) => {
         return dispatch(quoteError(error))
