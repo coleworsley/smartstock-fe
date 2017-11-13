@@ -11,7 +11,8 @@ const quotes = (state=initialState, action) => {
     case 'QUOTE_ERROR':
       return Object.assign({}, state, { error: action.error });
     case 'QUOTE':
-      return Object.assign({}, state, { data: action.data });;
+      const data = [...action.data, ...state.data];
+      return Object.assign({}, state, { data: data });;
     default:
       return state;
   }
