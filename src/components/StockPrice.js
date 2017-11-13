@@ -5,19 +5,13 @@ import { fetchQuotes } from '../actions';
 class StockPrice extends Component {
   constructor() {
     super();
-    this.example = 'example'
-  }
-
-  componentDidMount() {
-    this.props.fetchQuotes('AAPL');
-  }
-
-  componentWillReceiveProps(np) {
-    console.log(np)
+    this.example = 'example';
+    this.state = {
+      symbol: 'AAPL'
+    }
   }
 
   render() {
-    console.log(this.props.quotes)
     const quotes = this.props.quotes.data.map(quote => {
       return (
         <tr>
@@ -31,6 +25,18 @@ class StockPrice extends Component {
 
     return (
       <div>
+        <div>
+          <input
+            type="text"
+            value={this.state.symbol}
+            onChange={(e) => this.setState({ symbol: e.target.value })}
+          />
+          <button
+            onClick={() => this.props.fetchQuotes(this.state.symbol)}
+          >
+            Search
+          </button>
+        </div>
         <table>
           <thead>
             <tr>
