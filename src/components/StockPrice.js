@@ -17,7 +17,7 @@ class StockPrice extends Component {
       return (
         <tr key={quote.symbol}>
           <td>
-            <Link to={`/${quote.symbol}`}>{quote.name}</Link>
+            <Link to={`/detail/${quote.symbol}`}>{quote.name}</Link>
           </td>
           <td>{quote.lastPrice}</td>
           <td>{quote.netChange}</td>
